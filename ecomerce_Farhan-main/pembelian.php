@@ -15,7 +15,9 @@ if($query) {
 			echo '<script>alert("Pesanan-mu berhasil terkirim, Terimakasih sudah berlangganan di Farchoco.");
 			location.href="index.php"</script>';
 	  	}else {
-			echo '<script>alert("Pesanan-mu gagal.")</script>';
+            echo '<script>alert("Pesanan-mu gagal.")</script>';
+            $erorr =mysqli_error($conn);
+            echo "eror:$erorr"  ;
 	  	}
 }
 ?>
@@ -125,8 +127,8 @@ body {
                         <input type="text" class="form-control" id="inputName" name="username" required>
                     </div>
                     <div class="form-group">
-                    <label for="inputnamacoklat">Pilih Coklat Ingin Kamu Beli</label>
-						<select class="form-control" id="inputnamacoklat" name="nama_produk" required onchange="updatePrice()">
+                    <label for="nama_produk">Pilih Coklat Ingin Kamu Beli</label>
+						<select class="form-control" id="nama_produk" name="nama_produk" required onchange="updatePrice()">
 							<option value="- Pilih Item -">- Pilih Item -</option>
 							<option value="Sweet Choco">Sweet Choco</option>
                             <option value="White Coklat">White Coklat</option>
@@ -157,10 +159,9 @@ body {
                     </div>
                     <script>
 					function updatePrice() {
-  						var selectedItem = document.getElementById("inputnamacoklat").value;
-   						var hargaInput = document.getElementById("inputhargaitem");
-
-   					switch (selectedItem) {
+  						var selectedItem = document.getElementById("nama_produk").value;
+   						var hargaInput = document.getElementById("harga");
+   					 switch (selectedItem) {
 						case "- Pilih Item -":
    					        hargaInput.value = " ";
     					    break;
@@ -186,5 +187,10 @@ body {
 		</div>
 	</div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    updatePrice();
+  });
+</script>
 </body>
 </html>
